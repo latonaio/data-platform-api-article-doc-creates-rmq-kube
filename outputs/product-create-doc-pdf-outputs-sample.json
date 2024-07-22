@@ -1,0 +1,24 @@
+{
+  "connection_key": "request",
+  "result": true,
+  "redis_key": "abcdefg",
+  "filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+  "api_status_code": 200,
+  "runtime_session_id": "8d6058baf2ae4d65844084fe02d4ded3",
+  "business_partner": 101,
+  "service_label": "PRODUCT_MASTER_DOC",
+  "api_type": "creates",
+  "message": {
+    "Product": "A3750",
+    "DocType": "INVOICE",
+    "FileExtension": "pdf",
+    "DocVersionID": 1,
+    "DocID": "04418c52bb6d5344a85579a514246a3eec311e28628069b7179eca864db6d4fd",
+    "DocIssuerBusinessPartner": 101,
+    "FilePath": "101/",
+    "FileName": "ラトナ株式会社_請求書_20221216_0001"
+  },
+  "api_schema": "",
+  "accepter": [""],
+  "deleted": false
+}

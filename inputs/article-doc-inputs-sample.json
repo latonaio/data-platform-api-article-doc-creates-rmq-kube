@@ -1,0 +1,26 @@
+{
+  "connection_key": "request",
+  "result": true,
+  "redis_key": "abcdefg",
+  "filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+  "api_status_code": 200,
+  "runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
+  "business_partner": 1001,
+  "service_label": "ARTICLE_DOC",
+  "api_type": "creates",
+  "Article": {
+    "Article": 1,
+    "HeaderDoc": {
+      "DocType": "IMAGE",
+      "DocVersionID": 1,
+      "DocID": null,
+      "FileExtension": "png",
+      "FileName": "TEST",
+      "FilePath": "",
+      "DocIssuerBusinessPartner": 1001
+    }
+  },
+  "api_schema": "DPFMArticleDocCreates",
+  "accepter": ["HeaderDoc"],
+  "doc_data": ""
+}

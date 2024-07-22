@@ -1,0 +1,98 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: data-platform-api-article-doc-creates-rmq-kube
+  name: data-platform-api-article-doc-creates-rmq-kube
+spec:
+  selector:
+    matchLabels:
+      run: data-platform-api-article-doc-creates-rmq-kube
+      app: ARTICLE_DOC
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        run: data-platform-api-article-doc-creates-rmq-kube
+        app: ARTICLE_DOC
+    spec:
+      nodeName: worker
+      hostname: data-platform-api-article-doc-creates-rmq-kube
+      containers:
+        - name: data-platform-api-article-doc-creates-rmq-kube
+          image: latonaio/data-platform-api-article-doc-creates-rmq-kube
+          imagePullPolicy: Always
+          env:
+            - name: TZ
+              value: Asia/Tokyo
+            - name: RMQ_QUEUE_FROM
+              value: "data-platform-api-article-doc-creates-queue"
+            - name: RMQ_QUEUE_TO_SQL
+              value: "sql-update-kube"
+            - name: RMQ_SESSION_CONTROL_QUEUE
+              value: "data-platform-api-article-doc-creates-session-control-queue"
+            - name: MOUNT_PATH
+              value: "/volume"
+          envFrom:
+            - configMapRef:
+                name: env-config
+            - secretRef:
+                name: env-secret
+          volumeMounts:
+            - name: doc-storage
+              mountPath: /volume
+      volumes:
+        - name: doc-persistent-storage
+          persistentVolumeClaim:
+            claimName: data-platform-api-article-doc-creates-rmq-kube-pv-claim
+        - name: doc-storage
+          hostPath:
+            path: /mnt/data-platform-api-article-doc-creates-rmq-kube
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: data-platform-api-article-doc-creates-rmq-kube
+  name: data-platform-api-article-doc-creates-rmq-kube
+spec:
+  selector:
+    run: data-platform-api-article-doc-creates-rmq-kube
+  type: ClusterIP
+  ports:
+    - name: api
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-platform-api-article-doc-creates-rmq-kube-pv-claim
+  namespace: default
+spec:
+  storageClassName: data-platform-api-article-doc-creates-rmq-kube
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: data-platform-api-article-doc-creates-rmq-kube-pv-volume
+  labels:
+    type: local
+  namespace: default
+spec:
+  storageClassName: data-platform-api-article-doc-creates-rmq-kube
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data-platform-api-article-doc-creates-rmq-kube
+---

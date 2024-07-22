@@ -1,0 +1,24 @@
+{
+  "connection_key": "request",
+  "result": true,
+  "redis_key": "abcdefg",
+  "filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+  "api_status_code": 200,
+  "runtime_session_id": "21ecad9dcebe4ef38b7913ee36431795",
+  "business_partner": 101,
+  "service_label": "PRODUCT_MASTER_DOC",
+  "api_type": "creates",
+  "message": {
+    "Product": "A3750",
+    "DocType": "IMAGE",
+    "FileExtension": "jpg",
+    "DocVersionID": 1,
+    "DocID": "bf1daccd8c0084fed9d215b177c4276ace8aab13b726ec75ece753838d3d67e5",
+    "DocIssuerBusinessPartner": 101,
+    "FilePath": "101/",
+    "FileName": "ラトナ株式会社_請求書_20221216_0001"
+  },
+  "api_schema": "",
+  "accepter": [""],
+  "deleted": false
+}
